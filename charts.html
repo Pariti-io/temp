@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Box Plot with Custom Legend and Hover</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+  <div id="chart" style="width:100%;max-width:900px;height:600px;"></div>
+
+  <script>
+    // Box plot data
+    var y = ['Entry-Mid', 'Mid-Senior', 'Director/Managerial', 'Executive'];
+
+    var trace1 = {
+      x: [13080.40, 4182.00, 5280.00, 5335.00, 9000.00, 13332.00],
+      y: Array(6).fill('Entry-Mid'),
+      name: 'Industry Salary',
+      type: 'box',
+      orientation: 'h',
+      boxmean: true,
+      marker: {
+        line: { width: 3 }
+      },
+      hovertemplate: `
+        Minimum: %{x}<br>
+        Median: %{x}<br>
+        Mean: %{x}<br>
+        Maximum: %{x}<extra></extra>
+      `,
+      legendgroup: 'industry',
+      showlegend: true
+    };
+
+    var trace2 = {
+      x: [13340.16, 16799.00, 17138.40, 26000.00, 34000.00],
+      y: Array(5).fill('Mid-Senior'),
+      name: 'Industry Salary',
+      type: 'box',
+      orientation: 'h',
+      boxmean: true,
+      marker: {
+        line: { width: 3 }
+      },
+      hovertemplate: `
+        Minimum: %{x}<br>
+        Median: %{x}<br>
+        Mean: %{x}<br>
+        Maximum: %{x}<extra></extra>
+      `,
+      legendgroup: 'industry',
+      showlegend: false
+    };
+
+    var trace3 = {
+      x: [55584.00, 60000.00, 66000.00, 75000.00],
+      y: Array(4).fill('Director/Managerial'),
+      name: 'Industry Salary',
+      type: 'box',
+      orientation: 'h',
+      boxmean: true,
+      marker: {
+        line: { width: 3 }
+      },
+      hovertemplate: `
+        Minimum: %{x}<br>
+        Median: %{x}<br>
+        Mean: %{x}<br>
+        Maximum: %{x}<extra></extra>
+      `,
+      legendgroup: 'industry',
+      showlegend: false
+    };
+
+    var trace4 = {
+      x: [70000.00, 85000.00, 150000.00],
+      y: Array(3).fill('Executive'),
+      name: 'Industry Salary',
+      type: 'box',
+      orientation: 'h',
+      boxmean: true,
+      marker: {
+        line: { width: 3 }
+      },
+      hovertemplate: `
+        Minimum: %{x}<br>
+        Median: %{x}<br>
+        Mean: %{x}<br>
+        Maximum: %{x}<extra></extra>
+      `,
+      legendgroup: 'industry',
+      showlegend: false
+    };
+
+    // Market Min scatter points
+    var marketMin = {
+      x: [1080.40, 11080.40, 40080.40, 60080.40],
+      y: ['Entry-Mid', 'Mid-Senior', 'Director/Managerial', 'Executive'],
+      mode: 'markers',
+      marker: {
+        size: 10,
+        color: 'blue',
+        symbol: 'circle'
+      },
+      name: 'Market Minimum',
+      legendgroup: 'marketMin',
+      showlegend: true,
+      hovertemplate: `
+        Market Minimum: %{x}<extra></extra>
+      `
+    };
+
+    // Market Max scatter points
+    var marketMax = {
+      x: [15584.00, 40584.00, 80584.00, 150000.00],
+      y: ['Entry-Mid', 'Mid-Senior', 'Director/Managerial', 'Executive'],
+      mode: 'markers',
+      marker: {
+        size: 10,
+        color: 'green',
+        symbol: 'circle'
+      },
+      name: 'Market Maximum',
+      legendgroup: 'marketMax',
+      showlegend: true,
+      hovertemplate: `
+        Market Maximum: %{x}<extra></extra>
+      `
+    };
+
+    var data = [trace1, trace2, trace3, trace4, marketMin, marketMax];
+
+    var layout = {
+      title: {
+        text: 'Salary Ranges by Seniority Level with Market Min/Max'
+      },
+      xaxis: {
+        title: { text: 'Salary (USD)' },
+        zeroline: false
+      },
+      yaxis: {
+        title: { text: 'Seniority Levels' },
+        automargin: true
+      },
+      boxmode: 'group',
+      legend: {
+        title: { text: 'Legend' },
+        itemsizing: 'constant'
+      },
+      hovermode: 'closest', // Improves hover precision
+      boxgap: 0.3,
+      boxgroupgap: 0.1
+    };
+
+    Plotly.newPlot('chart', data, layout);
+  </script>
+</body>
+</html>
